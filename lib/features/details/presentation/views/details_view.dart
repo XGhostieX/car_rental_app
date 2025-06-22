@@ -10,7 +10,16 @@ class DetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const DetailsViewBody(),
+      appBar: AppBar(
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.info_outline),
+            Text('Information'),
+          ],
+        ),
+      ),
+      body: DetailsViewBody(car: car),
     );
   }
 }

@@ -7,25 +7,25 @@ import 'car_item.dart';
 class CarsListview extends StatelessWidget {
   final List<Car> cars = [
     Car(
-      model: 'Nissan Sunny',
+      model: 'Fortuner GR',
       distance: 870,
       fuelCapacity: 50,
       pricePerHour: 45,
     ),
     Car(
-      model: 'Nissan Sunny',
+      model: 'Fortuner GR',
       distance: 870,
       fuelCapacity: 50,
       pricePerHour: 45,
     ),
     Car(
-      model: 'Nissan Sunny',
+      model: 'Fortuner GR',
       distance: 870,
       fuelCapacity: 50,
       pricePerHour: 45,
     ),
     Car(
-      model: 'Nissan Sunny',
+      model: 'Fortuner GR',
       distance: 870,
       fuelCapacity: 50,
       pricePerHour: 45,
@@ -38,7 +38,7 @@ class CarsListview extends StatelessWidget {
     return ListView.builder(
       itemCount: cars.length,
       itemBuilder: (context, index) => InkWell(
-        onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => DetailsView(car: cars[index]),
         )),
         child: CarItem(car: cars[index]),
