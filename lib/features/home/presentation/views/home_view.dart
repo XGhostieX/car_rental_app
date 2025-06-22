@@ -8,7 +8,12 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: HomeViewBody(),
+      appBar: AppBar(
+        title: Center(child: Text('Choose Your Car')),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+      ),
+      body: const HomeViewBody(),
     );
   }
 }
