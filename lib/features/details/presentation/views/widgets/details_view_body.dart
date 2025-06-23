@@ -18,7 +18,7 @@ class DetailsViewBody extends StatelessWidget {
             car: car,
           ),
           const SizedBox(height: 20),
-          ProfileMap(),
+          ProfileMap(car: car),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(

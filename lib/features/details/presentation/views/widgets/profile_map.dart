@@ -1,7 +1,11 @@
+import 'package:car_rental_app/features/map/presentation/views/map_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/models/car.dart';
+
 class ProfileMap extends StatelessWidget {
-  const ProfileMap({super.key});
+  final Car car;
+  const ProfileMap({super.key, required this.car});
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +40,23 @@ class ProfileMap extends StatelessWidget {
           ),
           const SizedBox(width: 20),
           Expanded(
-            child: Container(
-              height: 170,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                  image: AssetImage('assets/maps.png'),
-                  fit: BoxFit.cover,
+            child: InkWell(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => MapView(car: car),
+              )),
+              child: Container(
+                height: 170,
+                decoration: BoxDecoration(
+                  image: const DecorationImage(
+                    image: AssetImage('assets/maps.png'),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.black12, spreadRadius: 5, blurRadius: 10),
+                  ],
                 ),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.black12, spreadRadius: 5, blurRadius: 10),
-                ],
               ),
             ),
           ),
