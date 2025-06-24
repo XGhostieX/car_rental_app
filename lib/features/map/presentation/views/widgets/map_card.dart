@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/models/car.dart';
@@ -129,9 +130,9 @@ class MapCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 50,
-              right: 20,
-              child: Image.asset('assets/white_car.png'),
+              top: 30,
+              right: 10,
+              child: CachedNetworkImage(imageUrl: car.image, height: 100),
             ),
           ],
         ),

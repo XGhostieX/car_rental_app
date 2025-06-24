@@ -1,48 +1,36 @@
-import 'package:car_rental_app/features/details/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/models/car.dart';
+import '../../../../details/presentation/views/details_view.dart';
+import '../../views_model/home_cubit/home_cubit.dart';
 import 'car_item.dart';
 
 class CarsListview extends StatelessWidget {
-  final List<Car> cars = [
-    Car(
-      model: 'Fortuner GR',
-      distance: 870,
-      fuelCapacity: 50,
-      pricePerHour: 45,
-    ),
-    Car(
-      model: 'Fortuner GR',
-      distance: 870,
-      fuelCapacity: 50,
-      pricePerHour: 45,
-    ),
-    Car(
-      model: 'Fortuner GR',
-      distance: 870,
-      fuelCapacity: 50,
-      pricePerHour: 45,
-    ),
-    Car(
-      model: 'Fortuner GR',
-      distance: 870,
-      fuelCapacity: 50,
-      pricePerHour: 45,
-    )
-  ];
-  CarsListview({super.key});
+  const CarsListview({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: cars.length,
-      itemBuilder: (context, index) => InkWell(
-        onTap: () => Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => DetailsView(car: cars[index]),
-        )),
-        child: CarItem(car: cars[index]),
-      ),
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is HomeLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is HomeSuccess) {
+          return ListView.builder(
+            itemCount: state.cars.length,
+            itemBuilder: (context, index) => InkWell(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => DetailsView(car: state.cars[index]),
+              )),
+              child: CarItem(car: state.cars[index]),
+            ),
+          );
+        } else if (state is HomeFailure) {
+          return Center(child: Text(state.errMsg));
+        } else {
+          return const Center(
+              child: Text('Something Went Wrong! Please Try Again Later'));
+        }
+      },
     );
   }
 }

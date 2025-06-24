@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/models/car.dart';
@@ -20,7 +21,7 @@ class CarItem extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Image.asset('assets/car_image.png', height: 120),
+          CachedNetworkImage(imageUrl: car.image, height: 120),
           Text(
             car.model,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -43,7 +44,7 @@ class CarItem extends StatelessWidget {
                     children: [
                       Image.asset('assets/pump.png'),
                       const SizedBox(width: 5),
-                      Text('${car.distance.toStringAsFixed(0)}L'),
+                      Text('${car.fuelCapacity.toStringAsFixed(0)}L'),
                     ],
                   ),
                 ],
