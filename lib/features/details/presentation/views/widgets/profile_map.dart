@@ -3,9 +3,36 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/models/car.dart';
 
-class ProfileMap extends StatelessWidget {
+class ProfileMap extends StatefulWidget {
   final Car car;
   const ProfileMap({super.key, required this.car});
+
+  @override
+  State<ProfileMap> createState() => _ProfileMapState();
+}
+
+class _ProfileMapState extends State<ProfileMap>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
+    _animation = Tween<double>(begin: 1.0, end: 1.5).animate(_controller)
+      ..addListener(() => setState(() {}));
+    _controller.forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,20 +69,24 @@ class ProfileMap extends StatelessWidget {
           Expanded(
             child: InkWell(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => MapView(car: car),
+                builder: (context) => MapView(car: widget.car),
               )),
               child: Container(
                 height: 170,
                 decoration: BoxDecoration(
-                  image: const DecorationImage(
-                    image: AssetImage('assets/maps.png'),
-                    fit: BoxFit.cover,
-                  ),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: const [
                     BoxShadow(
                         color: Colors.black12, spreadRadius: 5, blurRadius: 10),
                   ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadiusGeometry.circular(20),
+                  child: Transform.scale(
+                    scale: _animation.value,
+                    alignment: Alignment.center,
+                    child: Image.asset('assets/maps.png', fit: BoxFit.cover),
+                  ),
                 ),
               ),
             ),
