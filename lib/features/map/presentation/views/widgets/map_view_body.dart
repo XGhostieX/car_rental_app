@@ -19,9 +19,13 @@ class MapViewBody extends StatelessWidget {
             initialZoom: 13,
           ),
           children: [
+            // TileLayer(
+            //   urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            //   subdomains: ['a', 'b', 'c '],
+            // ),
             TileLayer(
-              urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              subdomains: ['a', 'b', 'c '],
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+              userAgentPackageName: 'com.example.car_rental_app',
             ),
           ],
         ),
